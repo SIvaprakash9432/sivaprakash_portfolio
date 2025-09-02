@@ -1,18 +1,18 @@
 import { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
+import { Home, User, Wrench, FolderOpen, Briefcase, GraduationCap, Mail } from 'lucide-react';
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
 
   const navItems = [
-    { id: 'home', label: 'Home' },
-    { id: 'about', label: 'About' },
-    { id: 'skills', label: 'Skills' },
-    { id: 'projects', label: 'Projects' },
-    { id: 'experience', label: 'Experience' },
-    { id: 'education', label: 'Education' },
-    { id: 'contact', label: 'Contact' }
+    { id: 'home', label: 'Home', icon: Home },
+    { id: 'about', label: 'About', icon: User },
+    { id: 'skills', label: 'Skills', icon: Wrench },
+    { id: 'projects', label: 'Projects', icon: FolderOpen },
+    { id: 'experience', label: 'Experience', icon: Briefcase },
+    { id: 'education', label: 'Education', icon: GraduationCap },
+    { id: 'contact', label: 'Contact', icon: Mail }
   ];
 
   useEffect(() => {
@@ -45,72 +45,39 @@ const Navigation = () => {
   };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-card-border">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          {/* Logo */}
-          <div className="flex-shrink-0">
-            <button
-              onClick={() => scrollToSection('home')}
-              className="text-xl font-display font-bold text-gradient-primary hover:opacity-80 transition-opacity"
-            >
-              SIVAPRAKASH D
-            </button>
-          </div>
-
-          {/* Desktop Navigation */}
-          <div className="hidden md:block">
-            <div className="flex items-center space-x-8">
-              {navItems.map((item) => (
-                <button
-                  key={item.id}
-                  onClick={() => scrollToSection(item.id)}
-                  className={`relative px-3 py-2 text-sm font-medium transition-all duration-300 ${
-                    activeSection === item.id
-                      ? 'text-primary'
-                      : 'text-foreground-secondary hover:text-primary'
-                  }`}
-                >
+    <nav className="fixed bottom-0 left-0 right-0 z-50 bg-card/95 backdrop-blur-md border-t border-card-border">
+      <div className="max-w-md mx-auto px-4">
+        <div className="flex items-center justify-between py-2">
+          {navItems.map((item) => {
+            const IconComponent = item.icon;
+            return (
+              <button
+                key={item.id}
+                onClick={() => scrollToSection(item.id)}
+                className={`relative flex flex-col items-center justify-center p-3 rounded-lg transition-all duration-300 group min-w-0 ${
+                  activeSection === item.id
+                    ? 'text-primary bg-primary/10'
+                    : 'text-foreground-muted hover:text-primary hover:bg-primary/5'
+                }`}
+              >
+                <IconComponent 
+                  size={20} 
+                  className={`transition-all duration-300 ${
+                    activeSection === item.id ? 'scale-110' : 'group-hover:scale-105'
+                  }`} 
+                />
+                <span className={`text-xs font-medium mt-1 transition-all duration-300 ${
+                  activeSection === item.id ? 'opacity-100' : 'opacity-70'
+                }`}>
                   {item.label}
-                  {activeSection === item.id && (
-                    <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-primary animate-fade-in" />
-                  )}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* Mobile menu button */}
-          <div className="md:hidden">
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="p-2 text-foreground-secondary hover:text-primary transition-colors"
-            >
-              {isOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
-          </div>
+                </span>
+                {activeSection === item.id && (
+                  <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-8 h-0.5 bg-gradient-primary rounded-full animate-fade-in" />
+                )}
+              </button>
+            );
+          })}
         </div>
-
-        {/* Mobile Navigation */}
-        {isOpen && (
-          <div className="md:hidden absolute top-16 left-0 right-0 bg-card/95 backdrop-blur-md border-b border-card-border animate-fade-in-scale">
-            <div className="px-2 pt-2 pb-3 space-y-1">
-              {navItems.map((item) => (
-                <button
-                  key={item.id}
-                  onClick={() => scrollToSection(item.id)}
-                  className={`block w-full text-left px-3 py-2 text-base font-medium rounded-md transition-all duration-300 ${
-                    activeSection === item.id
-                      ? 'text-primary bg-primary/10'
-                      : 'text-foreground-secondary hover:text-primary hover:bg-accent'
-                  }`}
-                >
-                  {item.label}
-                </button>
-              ))}
-            </div>
-          </div>
-        )}
       </div>
     </nav>
   );
@@ -120,7 +87,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="min-h-screen bg-gradient-hero">
       <Navigation />
-      <main className="pt-16">
+      <main className="pb-20">
         {children}
       </main>
     </div>
