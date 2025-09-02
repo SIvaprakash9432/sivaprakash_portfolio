@@ -67,7 +67,7 @@ Shanmuga Industries Arts & Science College`;
   };
 
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center px-4 overflow-hidden">
+    <section id="home" className="relative min-h-screen flex items-center justify-center px-4 overflow-hidden pt-0">
       {/* Background Effects */}
       <div className="absolute inset-0 bg-gradient-glow opacity-30 animate-float" />
       <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-glow-pulse" />
