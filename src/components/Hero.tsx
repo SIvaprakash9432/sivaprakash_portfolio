@@ -84,7 +84,6 @@ Shanmuga Industries Arts & Science College`;
           <div className="h-12 mb-8">
             <p className="text-2xl md:text-3xl font-display font-medium text-foreground-secondary">
               {displayedText}
-              <span className="animate-pulse">|</span>
             </p>
           </div>
 
