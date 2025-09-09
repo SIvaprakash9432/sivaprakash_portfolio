@@ -76,7 +76,7 @@ Shanmuga Industries Arts & Science College`;
       <div className="relative z-10 text-center max-w-4xl mx-auto">
         {/* Main Content */}
         <div className="animate-fade-in">
-          <h1 className="text-5xl md:text-7xl font-display font-bold mb-6">
+          <h1 className="text-4xl md:text-5xl font-display font-bold mb-6">
             <span className="block text-foreground mb-2">Hi, I'm</span>
             <span className="block text-gradient-primary">SIVAPRAKASH D</span>
           </h1>
@@ -115,7 +115,7 @@ Shanmuga Industries Arts & Science College`;
           </div>
 
           {/* Social Links */}
-          <div className="flex items-center justify-center space-x-6">
+          <div className="flex items-center justify-center space-x-6 mb-20 sm:mb-16">
             <a
               href="https://github.com/Siva9943/"
               target="_blank"
