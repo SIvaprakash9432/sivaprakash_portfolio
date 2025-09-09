@@ -11,8 +11,13 @@ const Education = () => {
           if (entry.isIntersecting) {
             const animatedElements = entry.target.querySelectorAll('.animate-on-scroll');
             animatedElements.forEach((el, index) => {
+              const animationType = el.getAttribute('data-animation');
               setTimeout(() => {
-                el.classList.add('animate-fade-in');
+                if (animationType) {
+                  el.classList.add(animationType);
+                } else {
+                  el.classList.add('animate-fade-in');
+                }
               }, index * 200);
             });
           }
@@ -133,7 +138,7 @@ const Education = () => {
       
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
-        <div className="text-center mb-16 animate-on-scroll">
+        <div className="text-center mb-16 animate-on-scroll" data-animation="animate-slide-in-bottom">
           <h2 className="text-4xl md:text-5xl font-display font-bold text-gradient-primary mb-4">
             Educational Background
           </h2>
@@ -146,7 +151,11 @@ const Education = () => {
         {/* Education Timeline */}
         <div className="space-y-12 mb-16">
           {educationData.map((education, index) => (
-            <div key={education.id} className="animate-on-scroll">
+            <div 
+              key={education.id} 
+              className="animate-on-scroll"
+              data-animation={index % 2 === 0 ? "animate-slide-in-left" : "animate-slide-in-right"}
+            >
               <div className="card-professional">
                 {/* Education Header */}
                 <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between mb-6">
@@ -187,40 +196,20 @@ const Education = () => {
                   {education.description}
                 </p>
 
-                <div className="grid lg:grid-cols-2 gap-8">
-                  {/* Key Highlights */}
-                  <div>
-                    <h4 className="text-lg font-display font-semibold text-foreground mb-4 flex items-center">
-                      <Award size={20} className="mr-2 text-primary" />
-                      Key Highlights
-                    </h4>
-                    <ul className="space-y-2">
-                      {education.highlights.map((highlight, highlightIndex) => (
-                        <li key={highlightIndex} className="flex items-start text-sm text-foreground-secondary">
-                          <div className="w-2 h-2 bg-primary rounded-full mr-3 mt-2 flex-shrink-0" />
-                          {highlight}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  {/* Relevant Coursework */}
-                  <div>
-                    <h4 className="text-lg font-display font-semibold text-foreground mb-4 flex items-center">
-                      <BookOpen size={20} className="mr-2 text-secondary" />
-                      Relevant Coursework
-                    </h4>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                      {education.courses.map((course, courseIndex) => (
-                        <div
-                          key={courseIndex}
-                          className="px-3 py-2 bg-card border border-card-border text-sm rounded-md text-foreground-secondary hover:border-primary/30 transition-colors"
-                        >
-                          {course}
-                        </div>
-                      ))}
-                    </div>
-                  </div>
+                {/* Key Highlights */}
+                <div>
+                  <h4 className="text-lg font-display font-semibold text-foreground mb-4 flex items-center">
+                    <Award size={20} className="mr-2 text-primary" />
+                    Key Highlights
+                  </h4>
+                  <ul className="space-y-2">
+                    {education.highlights.map((highlight, highlightIndex) => (
+                      <li key={highlightIndex} className="flex items-start text-sm text-foreground-secondary">
+                        <div className="w-2 h-2 bg-primary rounded-full mr-3 mt-2 flex-shrink-0" />
+                        {highlight}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               </div>
             </div>
@@ -228,7 +217,7 @@ const Education = () => {
         </div>
 
         {/* Academic Achievements */}
-        <div className="animate-on-scroll">
+        <div className="animate-on-scroll" data-animation="animate-slide-in-bottom">
           <h3 className="text-3xl font-display font-bold text-center text-foreground mb-12">
             Academic Achievements
           </h3>
@@ -238,6 +227,7 @@ const Education = () => {
               <div 
                 key={achievement.title}
                 className="card-professional text-center animate-on-scroll group"
+                data-animation="animate-slide-in-bottom"
                 style={{ animationDelay: `${index * 100}ms` }}
               >
                 <div className="mb-6">
@@ -257,7 +247,7 @@ const Education = () => {
         </div>
 
         {/* Learning Philosophy */}
-        <div className="mt-16 animate-on-scroll">
+        <div className="mt-16 animate-on-scroll" data-animation="animate-slide-in-bottom">
           <div className="card-professional max-w-4xl mx-auto text-center">
             <Users className="text-primary mx-auto mb-6" size={40} />
             <h3 className="text-2xl font-display font-semibold text-foreground mb-4">
