@@ -13,7 +13,7 @@ const About = () => {
             animatedElements.forEach((el, index) => {
               setTimeout(() => {
                 el.classList.add('animate-fade-in');
-              }, index * 200);
+              }, index * 150);
             });
           }
         });

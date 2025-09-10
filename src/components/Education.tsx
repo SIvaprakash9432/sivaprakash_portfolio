@@ -11,14 +11,9 @@ const Education = () => {
           if (entry.isIntersecting) {
             const animatedElements = entry.target.querySelectorAll('.animate-on-scroll');
             animatedElements.forEach((el, index) => {
-              const animationType = el.getAttribute('data-animation');
               setTimeout(() => {
-                if (animationType) {
-                  el.classList.add(animationType);
-                } else {
-                  el.classList.add('animate-fade-in');
-                }
-              }, index * 200);
+                el.classList.add('animate-fade-in');
+              }, index * 150);
             });
           }
         });
@@ -138,7 +133,7 @@ const Education = () => {
       
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
-        <div className="text-center mb-16 animate-on-scroll" data-animation="animate-slide-in-bottom">
+        <div className="text-center mb-16 animate-on-scroll">
           <h2 className="text-4xl md:text-5xl font-display font-bold text-gradient-primary mb-4">
             Educational Background
           </h2>
@@ -154,7 +149,6 @@ const Education = () => {
             <div 
               key={education.id} 
               className="animate-on-scroll"
-              data-animation={index % 2 === 0 ? "animate-slide-in-left" : "animate-slide-in-right"}
             >
               <div className="card-professional">
                 {/* Education Header */}
@@ -217,7 +211,7 @@ const Education = () => {
         </div>
 
         {/* Academic Achievements */}
-        <div className="animate-on-scroll" data-animation="animate-slide-in-bottom">
+        <div className="animate-on-scroll">
           <h3 className="text-3xl font-display font-bold text-center text-foreground mb-12">
             Academic Achievements
           </h3>
@@ -227,7 +221,6 @@ const Education = () => {
               <div 
                 key={achievement.title}
                 className="card-professional text-center animate-on-scroll group"
-                data-animation="animate-slide-in-bottom"
                 style={{ animationDelay: `${index * 100}ms` }}
               >
                 <div className="mb-6">
@@ -247,7 +240,7 @@ const Education = () => {
         </div>
 
         {/* Learning Philosophy */}
-        <div className="mt-16 animate-on-scroll" data-animation="animate-slide-in-bottom">
+        <div className="mt-16 animate-on-scroll">
           <div className="card-professional max-w-4xl mx-auto text-center">
             <Users className="text-primary mx-auto mb-6" size={40} />
             <h3 className="text-2xl font-display font-semibold text-foreground mb-4">

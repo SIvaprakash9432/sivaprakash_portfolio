@@ -21,7 +21,7 @@ const Skills = () => {
             const animatedElements = entry.target.querySelectorAll('.animate-on-scroll');
             animatedElements.forEach((el, index) => {
               setTimeout(() => {
-                el.classList.add('animate-fade-in-scale');
+                el.classList.add('animate-fade-in');
               }, index * 100);
             });
           }

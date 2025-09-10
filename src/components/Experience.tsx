@@ -12,8 +12,8 @@ const Experience = () => {
             const animatedElements = entry.target.querySelectorAll('.animate-on-scroll');
             animatedElements.forEach((el, index) => {
               setTimeout(() => {
-                el.classList.add('animate-slide-in-left');
-              }, index * 200);
+                el.classList.add('animate-fade-in');
+              }, index * 150);
             });
           }
         });
