@@ -43,10 +43,10 @@ const Skills = () => {
       icon: Code2,
       color: 'primary',
       skills: [
-        { name: 'JavaScript', level: 85 },
-        { name: 'React', level: 80 },
-        { name: 'HTML/CSS', level: 90 },
-        { name: 'Bootstrap', level: 75 }
+        { name: 'JavaScript', icon: Globe },
+        { name: 'React', icon: Code2 },
+        { name: 'HTML/CSS', icon: Globe },
+        { name: 'Bootstrap', icon: Smartphone }
       ]
     },
     {
@@ -54,10 +54,10 @@ const Skills = () => {
       icon: Server,
       color: 'secondary',
       skills: [
-        { name: 'Python', level: 90 },
-        { name: 'Django', level: 85 },
-        { name: 'REST APIs', level: 80 },
-        { name: 'C', level: 70 }
+        { name: 'Python', icon: Terminal },
+        { name: 'Django', icon: Server },
+        { name: 'REST APIs', icon: Globe },
+        { name: 'C', icon: Code2 }
       ]
     },
     {
@@ -65,9 +65,9 @@ const Skills = () => {
       icon: Database,
       color: 'success',
       skills: [
-        { name: 'PostgreSQL', level: 80 },
-        { name: 'MySQL', level: 85 },
-        { name: 'ORM', level: 75 }
+        { name: 'PostgreSQL', icon: Database },
+        { name: 'MySQL', icon: Database },
+        { name: 'ORM', icon: Settings }
       ]
     },
     {
@@ -75,10 +75,10 @@ const Skills = () => {
       icon: Settings,
       color: 'warning',
       skills: [
-        { name: 'Git', level: 85 },
-        { name: 'GitHub', level: 90 },
-        { name: 'Postman', level: 80 },
-        { name: 'PyCharm', level: 75 }
+        { name: 'Git', icon: GitBranch },
+        { name: 'GitHub', icon: GitBranch },
+        { name: 'Postman', icon: Settings },
+        { name: 'PyCharm', icon: Terminal }
       ]
     }
   ];
@@ -151,31 +151,15 @@ const Skills = () => {
                   {category.skills.map((skill, skillIndex) => (
                     <div 
                       key={skill.name}
-                      className="animate-on-scroll"
+                      className="animate-on-scroll flex items-center space-x-3 p-3 rounded-lg hover:bg-muted/50 transition-colors"
                       style={{ animationDelay: `${(categoryIndex * 4 + skillIndex) * 50}ms` }}
                     >
-                      <div className="flex justify-between items-center mb-2">
-                        <span className="text-sm font-medium text-foreground-secondary">
-                          {skill.name}
-                        </span>
-                        <span className="text-xs text-foreground-muted">
-                          {skill.level}%
-                        </span>
+                      <div className={`p-2 rounded ${getColorClass(category.color, 'bg')} ${getColorClass(category.color, 'text')}`}>
+                        <skill.icon size={16} />
                       </div>
-                      <div className="w-full bg-muted rounded-full h-2">
-                        <div 
-                          className={`h-2 rounded-full bg-gradient-to-r transition-all duration-1000 ease-out ${
-                            category.color === 'primary' ? 'from-primary to-primary-glow' :
-                            category.color === 'secondary' ? 'from-secondary to-secondary-glow' :
-                            category.color === 'success' ? 'from-success to-success' :
-                            'from-warning to-warning'
-                          }`}
-                          style={{ 
-                            width: `${skill.level}%`,
-                            animationDelay: `${(categoryIndex * 4 + skillIndex) * 100}ms`
-                          }}
-                        />
-                      </div>
+                      <span className="text-sm font-medium text-foreground-secondary">
+                        {skill.name}
+                      </span>
                     </div>
                   ))}
                 </div>

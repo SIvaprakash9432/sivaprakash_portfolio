@@ -32,9 +32,9 @@ const Experience = () => {
     {
       id: 1,
       company: 'VCODEZ',
-      position: 'Full Stack Developer Intern',
+      position: 'Python Developer',
       duration: 'Internship Program',
-      location: 'Remote/On-site',
+      location: 'Onsite',
       type: 'Internship',
       description: 'Gained hands-on experience in full-stack web development, working with modern technologies and contributing to real-world projects. Developed proficiency in both frontend and backend development practices.',
       responsibilities: [
@@ -228,47 +228,6 @@ const Experience = () => {
           ))}
         </div>
 
-        {/* Skills Development */}
-        <div className="animate-on-scroll">
-          <h3 className="text-3xl font-display font-bold text-center text-foreground mb-12">
-            Professional Development
-          </h3>
-          
-          <div className="grid md:grid-cols-3 gap-8">
-            {skills.map((skillCategory, index) => (
-              <div 
-                key={skillCategory.category}
-                className="card-professional animate-on-scroll"
-                style={{ animationDelay: `${index * 100}ms` }}
-              >
-                <div className="text-center mb-6">
-                  <div className={`p-4 rounded-lg mx-auto mb-4 w-fit ${getColorClass(skillCategory.color, 'bg')} ${getColorClass(skillCategory.color, 'text')}`}>
-                    <skillCategory.icon size={32} />
-                  </div>
-                  <h4 className="text-xl font-display font-semibold text-foreground">
-                    {skillCategory.category}
-                  </h4>
-                </div>
-                
-                <ul className="space-y-3">
-                  {skillCategory.items.map((item, itemIndex) => (
-                    <li 
-                      key={itemIndex}
-                      className="flex items-center text-sm text-foreground-secondary"
-                    >
-                      <div className={`w-2 h-2 rounded-full mr-3 flex-shrink-0 ${
-                        skillCategory.color === 'primary' ? 'bg-primary' :
-                        skillCategory.color === 'secondary' ? 'bg-secondary' :
-                        'bg-success'
-                      }`} />
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-        </div>
       </div>
     </section>
   );

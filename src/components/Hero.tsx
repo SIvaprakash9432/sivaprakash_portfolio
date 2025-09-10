@@ -3,19 +3,7 @@ import { Github, Linkedin, Mail, ExternalLink, Download, ChevronDown } from 'luc
 import { Button } from './ui/button';
 
 const Hero = () => {
-  const [displayedText, setDisplayedText] = useState('');
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const fullText = 'Full Stack Developer';
-
-  useEffect(() => {
-    if (currentIndex < fullText.length) {
-      const timeout = setTimeout(() => {
-        setDisplayedText(prev => prev + fullText[currentIndex]);
-        setCurrentIndex(prev => prev + 1);
-      }, 100);
-      return () => clearTimeout(timeout);
-    }
-  }, [currentIndex, fullText]);
+  const fullText = 'Python Developer';
 
   const scrollToAbout = () => {
     const aboutSection = document.getElementById('about');
@@ -75,25 +63,25 @@ Shanmuga Industries Arts & Science College`;
       
       <div className="relative z-10 text-center max-w-4xl mx-auto">
         {/* Main Content */}
-        <div className="animate-fade-in">
-          <h1 className="text-4xl md:text-5xl font-display font-bold mb-6">
+        <div className="animate-slide-in-bottom">
+          <h1 className="text-4xl md:text-5xl font-display font-bold mb-6 animate-slide-in-left" style={{ animationDelay: '0.2s' }}>
             <span className="block text-foreground mb-2">Hi, I'm</span>
             <span className="block text-gradient-primary">SIVAPRAKASH D</span>
           </h1>
           
-          <div className="h-12 mb-8">
+          <div className="mb-8 animate-slide-in-right" style={{ animationDelay: '0.4s' }}>
             <p className="text-2xl md:text-3xl font-display font-medium text-foreground-secondary">
-              {displayedText}
+              {fullText}
             </p>
           </div>
 
-          <p className="text-lg md:text-xl text-foreground-muted mb-12 max-w-2xl mx-auto leading-relaxed">
-            Motivated Full Stack Developer with expertise in Python, Django, REST APIs, JavaScript, and React, 
+          <p className="text-lg md:text-xl text-foreground-muted mb-12 max-w-2xl mx-auto leading-relaxed animate-slide-in-left" style={{ animationDelay: '0.6s' }}>
+            Motivated Python Developer with expertise in Python, Django, REST APIs, JavaScript, and React, 
             focused on building dynamic web applications and scalable solutions.
           </p>
 
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16 animate-slide-in-bottom" style={{ animationDelay: '0.8s' }}>
             <Button 
               onClick={scrollToAbout}
               className="btn-hero group"
@@ -115,7 +103,7 @@ Shanmuga Industries Arts & Science College`;
           </div>
 
           {/* Social Links */}
-          <div className="flex items-center justify-center space-x-6 mb-20 sm:mb-16">
+          <div className="flex items-center justify-center space-x-6 mb-20 sm:mb-16 animate-slide-in-right" style={{ animationDelay: '1s' }}>
             <a
               href="https://github.com/Siva9943/"
               target="_blank"
