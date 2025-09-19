@@ -1,6 +1,8 @@
 import { useEffect, useRef } from 'react';
 import { ExternalLink, Github, Globe, Database, Code, Zap } from 'lucide-react';
 import { Button } from './ui/button';
+import agriWorldPreview from '../assets/agriworld-preview.jpg';
+import libraryPreview from '../assets/library-preview.jpg';
 
 const Projects = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -32,7 +34,7 @@ const Projects = () => {
   const projects = [
     {
       id: 1,
-      title: 'Farmer Website',
+      title: 'AgriWorld',
       description: 'A comprehensive web application designed to connect farmers with agricultural resources, market information, and community support. Built with Django framework and REST APIs for seamless data management.',
       longDescription: 'This full-stack web application serves as a digital platform for farmers to access market prices, weather information, agricultural best practices, and community forums. The platform includes user authentication, real-time data updates, and responsive design for mobile accessibility.',
       technologies: ['Django', 'Python', 'REST APIs', 'PostgreSQL', 'HTML/CSS', 'JavaScript'],
@@ -44,9 +46,9 @@ const Projects = () => {
         'Resource sharing platform',
         'Mobile-responsive design'
       ],
-      demoUrl: '#',
+      demoUrl: 'https://agriworld.onrender.com',
       githubUrl: 'https://github.com/Siva9943/',
-      image: '/api/placeholder/600/300',
+      image: 'agriworld-preview',
       status: 'Completed',
       category: 'Full Stack'
     },
@@ -64,9 +66,9 @@ const Projects = () => {
         'Search and filter functionality',
         'Administrative reporting'
       ],
-      demoUrl: '#',
+      demoUrl: 'https://library-management-c9x5.onrender.com/',
       githubUrl: 'https://github.com/Siva9943/',
-      image: '/api/placeholder/600/300',
+      image: 'library-preview',
       status: 'Completed',
       category: 'Web Application'
     }
@@ -102,15 +104,23 @@ const Projects = () => {
               {/* Project Image */}
               <div className={`relative group ${index % 2 === 1 ? 'lg:col-start-2' : ''}`}>
                 <div className="card-professional p-0 overflow-hidden">
-                  <div className="aspect-video bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center">
-                    <div className="text-center">
-                      <Code size={48} className="text-primary mx-auto mb-4" />
-                      <h3 className="text-lg font-display font-semibold text-foreground">
-                        {project.title}
-                      </h3>
-                      <p className="text-sm text-foreground-muted mt-2">
-                        {project.category}
-                      </p>
+                  <div 
+                    className="aspect-video bg-gradient-to-br from-primary/20 to-secondary/20 bg-cover bg-center relative"
+                    style={{
+                      backgroundImage: `url(${project.image === 'agriworld-preview' ? agriWorldPreview : libraryPreview})`
+                    }}
+                  >
+                    <div className="absolute inset-0 bg-black/40" />
+                    <div className="relative z-10 flex items-center justify-center h-full text-center">
+                      <div>
+                        <Code size={48} className="text-white mx-auto mb-4" />
+                        <h3 className="text-lg font-display font-semibold text-white">
+                          {project.title}
+                        </h3>
+                        <p className="text-sm text-white/80 mt-2">
+                          {project.category}
+                        </p>
+                      </div>
                     </div>
                   </div>
                   

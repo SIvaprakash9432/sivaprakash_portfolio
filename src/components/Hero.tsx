@@ -13,45 +13,13 @@ const Hero = () => {
   };
 
   const handleDownloadCV = () => {
-    // Create a simple text-based CV for demonstration
-    const cvContent = `SIVAPRAKASH D
-Full Stack Developer
-
-Contact:
-Email: sivaprakash622003@gmail.com
-Phone: +91 9432688537
-LinkedIn: www.linkedin.com/in/sivaprakash-d-9b5038258
-GitHub: https://github.com/Siva9943/
-Portfolio: sivaprakash06.netlify.app/
-
-TECHNICAL SKILLS:
-Programming: Python, JavaScript, HTML/CSS, PostgreSQL, MySQL, C
-Frameworks/Tools: Django, React, Bootstrap, Git, GitHub, Postman, PyCharm
-Development Practices: MVT, ORM, REST APIs
-
-OBJECTIVE:
-Motivated Full Stack Developer with expertise in Python, Django, REST APIs, JavaScript, and React, focused on building dynamic web applications and scalable solutions.
-
-PROJECTS:
-- Farmer Website (Django/REST APIs)
-- Library Management System
-
-EXPERIENCE:
-Internship at VCODEZ
-
-EDUCATION:
-Madha Engineering College
-Shanmuga Industries Arts & Science College`;
-
-    const blob = new Blob([cvContent], { type: 'text/plain' });
-    const url = URL.createObjectURL(blob);
+    // Create a link to download the PDF
     const link = document.createElement('a');
-    link.href = url;
-    link.download = 'Sivaprakash_D_CV.txt';
+    link.href = '/Sivaprakash_resume.pdf';
+    link.download = 'Sivaprakash_Resume.pdf';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
-    URL.revokeObjectURL(url);
   };
 
   return (
