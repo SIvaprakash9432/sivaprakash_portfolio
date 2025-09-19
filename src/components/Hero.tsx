@@ -15,7 +15,7 @@ const Hero = () => {
   const handleDownloadCV = () => {
     // Create a link to download the PDF
     const link = document.createElement('a');
-    link.href = '/Sivaprakash_resume.pdf';
+    link.href = '/Sivaprakash_resume-2.pdf';
     link.download = 'Sivaprakash_Resume.pdf';
     document.body.appendChild(link);
     link.click();
