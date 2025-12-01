@@ -1,225 +1,145 @@
-import { useEffect, useRef } from 'react';
+import { motion } from "framer-motion";
+import { useInView } from "react-intersection-observer";
 import { 
   Code2, 
   Database, 
-  Server, 
-  Smartphone, 
-  Globe, 
-  GitBranch,
+  Layers, 
+  Wrench,
   Terminal,
-  Settings
-} from 'lucide-react';
+  BookOpen
+} from "lucide-react";
+
+const skillCategories = [
+  {
+    title: "Languages",
+    icon: Code2,
+    skills: ["Python", "JavaScript", "C", "HTML", "CSS"],
+    color: "from-primary to-primary/60"
+  },
+  {
+    title: "Frameworks & Libraries",
+    icon: Layers,
+    skills: ["Django", "REST API", "NumPy", "Pandas", "TensorFlow", "React.js", "Bootstrap"],
+    color: "from-secondary to-secondary/60"
+  },
+  {
+    title: "Databases",
+    icon: Database,
+    skills: ["MySQL", "PostgreSQL"],
+    color: "from-primary to-secondary"
+  },
+  {
+    title: "Tools & Platforms",
+    icon: Wrench,
+    skills: ["Git", "GitHub", "Postman", "Netlify", "Render", "Docker"],
+    color: "from-secondary to-primary"
+  },
+  {
+    title: "Development Practices",
+    icon: Terminal,
+    skills: ["MVT", "ORM", "REST APIs"],
+    color: "from-primary/80 to-secondary/80"
+  },
+  {
+    title: "Problem Solving",
+    icon: BookOpen,
+    skills: ["HackerRank", "GeeksforGeeks", "LeetCode"],
+    color: "from-secondary/80 to-primary/80"
+  }
+];
 
 const Skills = () => {
-  const sectionRef = useRef<HTMLDivElement>(null);
+  const [ref, inView] = useInView({
+    triggerOnce: true,
+    threshold: 0.1,
+  });
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const animatedElements = entry.target.querySelectorAll('.animate-on-scroll');
-            animatedElements.forEach((el, index) => {
-              setTimeout(() => {
-                el.classList.add('animate-fade-in');
-              }, index * 100);
-            });
-          }
-        });
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.15,
       },
-      { threshold: 0.2 }
-    );
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, []);
-
-  const skillCategories = [
-    {
-      title: 'Frontend Development',
-      icon: Code2,
-      color: 'primary',
-      skills: [
-        { name: 'JavaScript', icon: Globe },
-        { name: 'React', icon: Code2 },
-        { name: 'HTML/CSS', icon: Globe },
-        { name: 'Bootstrap', icon: Smartphone }
-      ]
     },
-    {
-      title: 'Backend Development',
-      icon: Server,
-      color: 'secondary',
-      skills: [
-        { name: 'Python', icon: Terminal },
-        { name: 'Django', icon: Server },
-        { name: 'REST APIs', icon: Globe },
-        { name: 'C', icon: Code2 }
-      ]
-    },
-    {
-      title: 'Database Management',
-      icon: Database,
-      color: 'success',
-      skills: [
-        { name: 'PostgreSQL', icon: Database },
-        { name: 'MySQL', icon: Database },
-        { name: 'ORM', icon: Settings }
-      ]
-    },
-    {
-      title: 'Development Tools',
-      icon: Settings,
-      color: 'warning',
-      skills: [
-        { name: 'Git', icon: GitBranch },
-        { name: 'GitHub', icon: GitBranch },
-        { name: 'Postman', icon: Settings },
-        { name: 'PyCharm', icon: Terminal }
-      ]
-    }
-  ];
+  };
 
-  const getColorClass = (color: string, type: 'bg' | 'text' | 'border') => {
-    const colorMap = {
-      primary: {
-        bg: 'bg-primary/10',
-        text: 'text-primary',
-        border: 'border-primary/30'
+  const itemVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        ease: [0.4, 0, 0.2, 1] as const,
       },
-      secondary: {
-        bg: 'bg-secondary/10',
-        text: 'text-secondary',
-        border: 'border-secondary/30'
-      },
-      success: {
-        bg: 'bg-success/10',
-        text: 'text-success',
-        border: 'border-success/30'
-      },
-      warning: {
-        bg: 'bg-warning/10',
-        text: 'text-warning',
-        border: 'border-warning/30'
-      }
-    };
-    return colorMap[color as keyof typeof colorMap]?.[type] || '';
+    },
   };
 
   return (
-    <section id="skills" className="py-24 px-4 relative overflow-hidden" ref={sectionRef}>
-      {/* Background Effects */}
-      <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
-      <div className="absolute bottom-0 right-1/3 w-80 h-80 bg-secondary/5 rounded-full blur-3xl" />
+    <section id="skills" className="py-20 relative overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-b from-background via-card/30 to-background" />
       
-      <div className="max-w-7xl mx-auto">
-        {/* Section Header */}
-        <div className="text-center mb-16 animate-on-scroll">
-          <h2 className="text-4xl md:text-5xl font-display font-bold text-gradient-primary mb-4">
-            Technical Skills
+      <div className="container mx-auto px-4 sm:px-6 relative z-10">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-16"
+        >
+          <h2 className="text-4xl sm:text-5xl font-display font-bold mb-4">
+            Technical <span className="gradient-text">Skills</span>
           </h2>
-          <div className="w-24 h-1 bg-gradient-primary mx-auto mb-8" />
-          <p className="text-lg text-foreground-muted max-w-2xl mx-auto">
-            Comprehensive expertise across the full development stack
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            A comprehensive toolkit for building modern, scalable full-stack applications
           </p>
-        </div>
+        </motion.div>
 
-        {/* Skills Grid */}
-        <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-8">
-          {skillCategories.map((category, categoryIndex) => (
-            <div 
-              key={category.title}
-              className="animate-on-scroll"
-              style={{ animationDelay: `${categoryIndex * 100}ms` }}
-            >
-              <div className="card-professional h-full">
-                {/* Category Header */}
-                <div className="flex items-center mb-6">
-                  <div className={`p-3 rounded-lg mr-4 ${getColorClass(category.color, 'bg')} ${getColorClass(category.color, 'text')}`}>
-                    <category.icon size={24} />
-                  </div>
-                  <h3 className="text-lg font-display font-semibold text-foreground">
-                    {category.title}
-                  </h3>
-                </div>
-
-                {/* Skills List */}
-                <div className="space-y-4">
-                  {category.skills.map((skill, skillIndex) => (
-                    <div 
-                      key={skill.name}
-                      className="animate-on-scroll flex items-center space-x-3 p-3 rounded-lg hover:bg-muted/50 transition-colors"
-                      style={{ animationDelay: `${(categoryIndex * 4 + skillIndex) * 50}ms` }}
-                    >
-                      <div className={`p-2 rounded ${getColorClass(category.color, 'bg')} ${getColorClass(category.color, 'text')}`}>
-                        <skill.icon size={16} />
-                      </div>
-                      <span className="text-sm font-medium text-foreground-secondary">
-                        {skill.name}
-                      </span>
+        <motion.div
+          ref={ref}
+          variants={containerVariants}
+          initial="hidden"
+          animate={inView ? "visible" : "hidden"}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto"
+        >
+          {skillCategories.map((category, index) => {
+            const Icon = category.icon;
+            return (
+              <motion.div
+                key={category.title}
+                variants={itemVariants}
+                className="group"
+              >
+                <div className="glass-card rounded-2xl p-6 h-full hover:shadow-glow-primary transition-all duration-300 perspective-card">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className={`p-3 rounded-xl bg-gradient-to-br ${category.color} shadow-lg`}>
+                      <Icon className="w-6 h-6 text-white" />
                     </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* Additional Skills Section */}
-        <div className="mt-16 animate-on-scroll">
-          <div className="card-professional">
-            <h3 className="text-2xl font-display font-semibold text-foreground mb-8 text-center">
-              Development Practices & Methodologies
-            </h3>
-            
-            <div className="grid md:grid-cols-3 gap-8">
-              <div className="text-center">
-                <div className="mb-4 flex justify-center">
-                  <div className="p-4 rounded-lg bg-primary/10 text-primary">
-                    <Terminal size={32} />
+                    <h3 className="text-xl font-display font-semibold">{category.title}</h3>
+                  </div>
+                  
+                  <div className="flex flex-wrap gap-2">
+                    {category.skills.map((skill, skillIndex) => (
+                      <motion.span
+                        key={skill}
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        animate={inView ? { opacity: 1, scale: 1 } : {}}
+                        transition={{
+                          duration: 0.3,
+                          delay: index * 0.15 + skillIndex * 0.05,
+                        }}
+                        className="px-3 py-1.5 rounded-lg bg-muted/50 text-sm font-medium hover:bg-primary/20 hover:text-primary transition-all duration-200 cursor-default border border-border/50"
+                      >
+                        {skill}
+                      </motion.span>
+                    ))}
                   </div>
                 </div>
-                <h4 className="text-lg font-display font-semibold text-foreground mb-2">
-                  MVT Architecture
-                </h4>
-                <p className="text-sm text-foreground-muted">
-                  Model-View-Template pattern implementation in Django applications
-                </p>
-              </div>
-
-              <div className="text-center">
-                <div className="mb-4 flex justify-center">
-                  <div className="p-4 rounded-lg bg-secondary/10 text-secondary">
-                    <GitBranch size={32} />
-                  </div>
-                </div>
-                <h4 className="text-lg font-display font-semibold text-foreground mb-2">
-                  Version Control
-                </h4>
-                <p className="text-sm text-foreground-muted">
-                  Git workflow and collaborative development practices
-                </p>
-              </div>
-
-              <div className="text-center">
-                <div className="mb-4 flex justify-center">
-                  <div className="p-4 rounded-lg bg-success/10 text-success">
-                    <Globe size={32} />
-                  </div>
-                </div>
-                <h4 className="text-lg font-display font-semibold text-foreground mb-2">
-                  Problem Solving
-                </h4>
-                <p className="text-sm text-foreground-muted">
-                  LeetCode and CodeChef competitive programming experience
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
+              </motion.div>
+            );
+          })}
+        </motion.div>
       </div>
     </section>
   );

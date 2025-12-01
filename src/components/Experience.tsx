@@ -1,233 +1,150 @@
-import { useEffect, useRef } from 'react';
-import { Briefcase, Calendar, MapPin, Award, Users, Code } from 'lucide-react';
+import { motion } from "framer-motion";
+import { useInView } from "react-intersection-observer";
+import { Briefcase, GraduationCap, Calendar, MapPin } from "lucide-react";
+
+const experiences = [
+  {
+    type: "work",
+    title: "Full Stack Python Developer",
+    organization: "VcodeZ Software Solutions",
+    location: "Chennai, India",
+    duration: "Jun 2025 – Oct 2025",
+    description: [
+      "Developed full-stack features end-to-end using Django and React.js",
+      "Built scalable Django REST APIs for authentication and data processing",
+      "Participated in requirement analysis and client communication",
+      "Improved backend architecture and implemented comprehensive testing workflows",
+      "Collaborated with cross-functional teams in Agile environment"
+    ],
+    icon: Briefcase,
+    color: "from-primary to-primary/60"
+  }
+];
+
+const education = [
+  {
+    type: "education",
+    title: "Master of Computer Applications (MCA)",
+    organization: "Madha Engineering College",
+    location: "Chennai, India",
+    duration: "2023 – 2025",
+    description: ["CCPA: 8.41 / 10.00"],
+    icon: GraduationCap,
+    color: "from-secondary to-secondary/60"
+  },
+  {
+    type: "education",
+    title: "Bachelor of Computer Applications (BCA)",
+    organization: "Shanmuga Industries Arts & Science College",
+    location: "Tiruvannamalai, India",
+    duration: "2020 – 2023",
+    description: ["CCPA: 8.64 / 10.00"],
+    icon: GraduationCap,
+    color: "from-primary/80 to-secondary/80"
+  }
+];
 
 const Experience = () => {
-  const sectionRef = useRef<HTMLDivElement>(null);
+  const [workRef, workInView] = useInView({
+    triggerOnce: true,
+    threshold: 0.1,
+  });
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const animatedElements = entry.target.querySelectorAll('.animate-on-scroll');
-            animatedElements.forEach((el, index) => {
-              setTimeout(() => {
-                el.classList.add('animate-fade-in');
-              }, index * 150);
-            });
-          }
-        });
-      },
-      { threshold: 0.3 }
+  const [eduRef, eduInView] = useInView({
+    triggerOnce: true,
+    threshold: 0.1,
+  });
+
+  const renderTimelineItem = (item: any, index: number, inView: boolean) => {
+    const Icon = item.icon;
+    return (
+      <motion.div
+        key={item.title}
+        initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
+        animate={inView ? { opacity: 1, x: 0 } : {}}
+        transition={{ duration: 0.6, delay: index * 0.2 }}
+        className="relative"
+      >
+        <div className="glass-card rounded-2xl p-6 hover:shadow-glow-primary transition-all duration-300">
+          <div className="flex items-start gap-4">
+            <div className={`p-3 rounded-xl bg-gradient-to-br ${item.color} shadow-lg flex-shrink-0`}>
+              <Icon className="w-6 h-6 text-white" />
+            </div>
+            
+            <div className="flex-1">
+              <h3 className="text-xl font-display font-bold mb-2">{item.title}</h3>
+              <p className="text-lg text-primary font-medium mb-2">{item.organization}</p>
+              
+              <div className="flex flex-wrap gap-4 text-sm text-muted-foreground mb-4">
+                <span className="flex items-center gap-1">
+                  <Calendar className="w-4 h-4" />
+                  {item.duration}
+                </span>
+                <span className="flex items-center gap-1">
+                  <MapPin className="w-4 h-4" />
+                  {item.location}
+                </span>
+              </div>
+
+              <ul className="space-y-2">
+                {item.description.map((point: string, i: number) => (
+                  <li key={i} className="flex items-start gap-2 text-foreground/80">
+                    <span className="text-primary mt-1.5">•</span>
+                    <span>{point}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </motion.div>
     );
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, []);
-
-  const experiences = [
-    {
-      id: 1,
-      company: 'VCODEZ',
-      position: 'Python Developer',
-      duration: 'Internship Program',
-      location: 'Onsite',
-      type: 'Internship',
-      description: 'Gained hands-on experience in full-stack web development, working with modern technologies and contributing to real-world projects. Developed proficiency in both frontend and backend development practices.',
-      responsibilities: [
-        'Collaborated with senior developers on web application projects',
-        'Implemented responsive user interfaces using HTML, CSS, and JavaScript',
-        'Developed backend functionality using Python and Django framework',
-        'Worked with databases for data management and optimization',
-        'Participated in code reviews and agile development processes',
-        'Debugged and tested applications to ensure quality deliverables'
-      ],
-      technologies: ['Python', 'Django', 'JavaScript', 'HTML/CSS', 'Git', 'Database Management'],
-      achievements: [
-        'Successfully completed assigned development tasks within deadlines',
-        'Contributed to team projects and collaborative development',
-        'Gained practical experience in software development lifecycle',
-        'Enhanced problem-solving and technical communication skills'
-      ],
-      icon: Code,
-      color: 'primary'
-    }
-  ];
-
-  const skills = [
-    {
-      category: 'Technical Growth',
-      items: [
-        'Full Stack Development',
-        'Code Quality & Testing',
-        'Version Control (Git)',
-        'Agile Methodologies'
-      ],
-      icon: Code,
-      color: 'primary'
-    },
-    {
-      category: 'Professional Skills',
-      items: [
-        'Team Collaboration',
-        'Problem Solving',
-        'Project Management',
-        'Technical Communication'
-      ],
-      icon: Users,
-      color: 'secondary'
-    },
-    {
-      category: 'Industry Knowledge',
-      items: [
-        'Software Development Lifecycle',
-        'Best Practices',
-        'Code Documentation',
-        'Debugging & Optimization'
-      ],
-      icon: Briefcase,
-      color: 'success'
-    }
-  ];
-
-  const getColorClass = (color: string, type: 'bg' | 'text' | 'border') => {
-    const colorMap = {
-      primary: {
-        bg: 'bg-primary/10',
-        text: 'text-primary',
-        border: 'border-primary/30'
-      },
-      secondary: {
-        bg: 'bg-secondary/10',
-        text: 'text-secondary',
-        border: 'border-secondary/30'
-      },
-      success: {
-        bg: 'bg-success/10',
-        text: 'text-success',
-        border: 'border-success/30'
-      }
-    };
-    return colorMap[color as keyof typeof colorMap]?.[type] || '';
   };
 
   return (
-    <section id="experience" className="py-24 px-4 relative overflow-hidden" ref={sectionRef}>
-      {/* Background Effects */}
-      <div className="absolute top-0 right-1/4 w-96 h-96 bg-success/5 rounded-full blur-3xl" />
-      <div className="absolute bottom-1/2 left-1/4 w-80 h-80 bg-primary/5 rounded-full blur-3xl" />
+    <section id="experience" className="py-20 relative overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-b from-background via-card/30 to-background" />
       
-      <div className="max-w-7xl mx-auto">
-        {/* Section Header */}
-        <div className="text-center mb-16 animate-on-scroll">
-          <h2 className="text-4xl md:text-5xl font-display font-bold text-gradient-primary mb-4">
-            Professional Experience
+      <div className="container mx-auto px-4 sm:px-6 relative z-10">
+        {/* Work Experience */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-16"
+        >
+          <h2 className="text-4xl sm:text-5xl font-display font-bold mb-4">
+            Work <span className="gradient-text">Experience</span>
           </h2>
-          <div className="w-24 h-1 bg-gradient-primary mx-auto mb-8" />
-          <p className="text-lg text-foreground-muted max-w-2xl mx-auto">
-            Building expertise through hands-on development experience and continuous learning
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            Professional journey in full-stack development
           </p>
+        </motion.div>
+
+        <div ref={workRef} className="max-w-4xl mx-auto space-y-6 mb-20">
+          {experiences.map((exp, index) => renderTimelineItem(exp, index, workInView))}
         </div>
 
-        {/* Experience Timeline */}
-        <div className="mb-16">
-          {experiences.map((experience, index) => (
-            <div key={experience.id} className="animate-on-scroll">
-              <div className="card-professional">
-                {/* Experience Header */}
-                <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-6">
-                  <div className="flex items-center space-x-4 mb-4 lg:mb-0">
-                    <div className={`p-3 rounded-lg ${getColorClass(experience.color, 'bg')} ${getColorClass(experience.color, 'text')}`}>
-                      <experience.icon size={24} />
-                    </div>
-                    <div>
-                      <h3 className="text-2xl font-display font-bold text-foreground">
-                        {experience.position}
-                      </h3>
-                      <p className="text-lg text-primary font-semibold">
-                        {experience.company}
-                      </p>
-                    </div>
-                  </div>
-                  
-                  <div className="flex flex-col sm:flex-row sm:items-center space-y-2 sm:space-y-0 sm:space-x-6">
-                    <div className="flex items-center text-foreground-muted">
-                      <Calendar size={16} className="mr-2" />
-                      <span className="text-sm">{experience.duration}</span>
-                    </div>
-                    <div className="flex items-center text-foreground-muted">
-                      <MapPin size={16} className="mr-2" />
-                      <span className="text-sm">{experience.location}</span>
-                    </div>
-                    <span className="px-3 py-1 bg-secondary/10 text-secondary text-sm rounded-full font-medium">
-                      {experience.type}
-                    </span>
-                  </div>
-                </div>
+        {/* Education */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-16"
+        >
+          <h2 className="text-4xl sm:text-5xl font-display font-bold mb-4">
+            <span className="gradient-text">Education</span>
+          </h2>
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            Academic background and qualifications
+          </p>
+        </motion.div>
 
-                {/* Description */}
-                <p className="text-foreground-secondary leading-relaxed mb-8">
-                  {experience.description}
-                </p>
-
-                <div className="grid lg:grid-cols-2 gap-8">
-                  {/* Responsibilities */}
-                  <div>
-                    <h4 className="text-lg font-display font-semibold text-foreground mb-4 flex items-center">
-                      <Briefcase size={20} className="mr-2 text-primary" />
-                      Key Responsibilities
-                    </h4>
-                    <ul className="space-y-2">
-                      {experience.responsibilities.map((responsibility, respIndex) => (
-                        <li key={respIndex} className="flex items-start text-sm text-foreground-secondary">
-                          <div className="w-2 h-2 bg-primary rounded-full mr-3 mt-2 flex-shrink-0" />
-                          {responsibility}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  {/* Achievements */}
-                  <div>
-                    <h4 className="text-lg font-display font-semibold text-foreground mb-4 flex items-center">
-                      <Award size={20} className="mr-2 text-secondary" />
-                      Key Achievements
-                    </h4>
-                    <ul className="space-y-2">
-                      {experience.achievements.map((achievement, achIndex) => (
-                        <li key={achIndex} className="flex items-start text-sm text-foreground-secondary">
-                          <div className="w-2 h-2 bg-secondary rounded-full mr-3 mt-2 flex-shrink-0" />
-                          {achievement}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-
-                {/* Technologies */}
-                <div className="mt-8">
-                  <h4 className="text-lg font-display font-semibold text-foreground mb-4">
-                    Technologies & Tools Used
-                  </h4>
-                  <div className="flex flex-wrap gap-2">
-                    {experience.technologies.map((tech, techIndex) => (
-                      <span
-                        key={techIndex}
-                        className="px-3 py-1 bg-card border border-card-border text-sm rounded-md text-foreground-secondary hover:border-primary/30 transition-colors"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-          ))}
+        <div ref={eduRef} className="max-w-4xl mx-auto space-y-6">
+          {education.map((edu, index) => renderTimelineItem(edu, index, eduInView))}
         </div>
-
       </div>
     </section>
   );
