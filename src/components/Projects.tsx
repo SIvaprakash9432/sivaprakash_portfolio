@@ -7,22 +7,6 @@ import { Badge } from "@/components/ui/badge";
 
 const projects = [
   {
-    title: "Organ Donation & Matching System + Disease Prediction",
-    duration: "Aug 2025 – Oct 2025",
-    tech: ["Django", "Machine Learning", "REST API", "Bootstrap"],
-    description: "Advanced healthcare platform combining organ donation matching with ML-based disease prediction.",
-    features: [
-      "Secure admin-verified registration & login system",
-      "ML-based donor–patient transplant compatibility prediction",
-      "CRUD management for donors, patients, and research teams",
-      "Test result uploads and comprehensive reporting",
-      "Real-time compatibility scoring algorithm"
-    ],
-    image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&auto=format&fit=crop",
-    github: "#",
-    demo: "#"
-  },
-  {
     title: "Agri World Platform",
     duration: "Jul 2025 – Aug 2025",
     tech: ["Django", "OAuth 2.0", "REST API", "JavaScript"],
@@ -51,8 +35,8 @@ const projects = [
       "Overdue notification system"
     ],
     image: "https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=800&auto=format&fit=crop",
-    github: "#",
-    demo: "#"
+    github: "https://github.com/Siva9943/Library_website.git",
+    demo: "https://library-management-c9x5.onrender.com/"
   },
   {
     title: "Government Website Clone (TNPSC-Style)",
@@ -70,6 +54,56 @@ const projects = [
     github: "#",
     demo: "https://siva9943.github.io/Government-site-TNPSC/"
   },
+   {
+    title: "E-Commerce DataBase Management System",
+    duration: "2025",
+    tech: ["PostgreSql"],
+    description: "Ecommerce database management system with complex queries and relational data handling.",
+    features: [
+      "design and implementation of relational database schema",
+      "complex SQL queries for data retrieval and manipulation",
+      "data integrity and normalization techniques",
+      "performance optimization strategies",
+      "practical experience with real-world ecommerce scenarios"
+    ],
+    image: "https://library.novasbe.pt/wp-content/uploads/2022/02/Design-sem-nome-2-e1646087319191.png",
+    github: "https://github.com/Siva9943/E-commerce-DB.git",
+    demo: "#"
+  },
+  {
+    title: "Organ Donation & Matching System + Disease Prediction",
+    duration: "Aug 2025 – Oct 2025",
+    tech: ["Django", "Machine Learning", "REST API", "Bootstrap"],
+    description: "Advanced healthcare platform combining organ donation matching with ML-based disease prediction.",
+    features: [
+      "Secure admin-verified registration & login system",
+      "ML-based donor–patient transplant compatibility prediction",
+      "CRUD management for donors, patients, and research teams",
+      "Test result uploads and comprehensive reporting",
+      "Real-time compatibility scoring algorithm"
+    ],
+    image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&auto=format&fit=crop",
+    github: "https://github.com/Siva9943/OrganDonation_Transplant_Matching_System.git",
+    demo: "#"
+  },
+  
+  {
+    title: "Weather API",
+    duration: "2025",
+    tech: ["React.js","REST API"],
+    description: "Build a weather application that fetches data from a public weather API and displays current weather information based on user input.",
+    features: [
+      "React based weather app",
+      "Fetches data from OpenWeatherMap API",
+      "Displays temperature, humidity, wind speed, and weather conditions",
+      "User-friendly interface with search functionality",
+      "Responsive design for various devices"
+    ],
+    image: "https://img.freepik.com/free-vector/weather-forecast-mobile-application_1284-59061.jpg",
+    github: "https://github.com/Siva9943/weather_application.git",
+    demo: "https://weatherapplicationreact01.netlify.app/"
+  }
+
   {
     title: "World-Wide Unemployment Prediction API",
     duration: "2025",
